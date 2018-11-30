@@ -1,8 +1,12 @@
-var urlParams = new URLSearchParams(window.location.search);
-var name = urlParams.get('name') || '';
-var urlPrefix = urlParams.get('prefix') || true;
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+var name = getParameterByName('name') || '';
+var urlPrefix = getParameterByName('prefix') || true;
 var XJS_URL = "https://cdn2.xsplit.com/xjs/download/2.9.0/xjs.min.js?source";
- 
+
 const loadScript = (url, callback) => {
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
